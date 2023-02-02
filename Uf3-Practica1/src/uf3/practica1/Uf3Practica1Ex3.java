@@ -15,7 +15,7 @@ import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class Uf3Practica1Ex2 {
+public class Uf3Practica1Ex3 {
 
     static Scanner scan = new Scanner(System.in);
 
