@@ -6,35 +6,43 @@ package uf3.practica1;
 
 import java.util.*;
 import java.io.*;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Uf3Practica1Ex1 {
 
     static Scanner scan = new Scanner(System.in);
-    static final String FITXER = "./textos.txt";
 
-    public static void main(boolean crearF, String escribir, String esborra) throws IOException {
-        File txt = new File(FITXER);
-        FileWriter fileW = new FileWriter(txt, crearF);
-        PrintWriter printW = new PrintWriter(fileW);
+    public static void main(String[] args) {
 
-        String missatge = scan.nextLine();
+        try {
+            File txt = new File("./arxiu.txt");
+            FileWriter writer = new FileWriter(txt, true);
+            PrintWriter pw = new PrintWriter(writer);
 
-        while (!missatge.equals(escribir)) {
-            if (missatge.equals(esborra)) {
-                fileW.close();
-                fileW = new FileWriter(txt, false);
-                printW = new PrintWriter(fileW);
-            } else {
-                printW.write(missatge + "\n");
+            String missatge = scan.nextLine();
+
+            while (!missatge.equals(null)) {
+                if (missatge.equals(null)) {
+                    writer.close();
+                    writer = new FileWriter(txt, false);
+                    pw = new PrintWriter(writer);
+                } else {
+                    pw.write(missatge + "\n");
+                }
+                missatge = scan.nextLine();
             }
-            missatge = scan.nextLine();
+
+            pw.println("Hola");
+
+            writer.flush();
+            writer.close();
+
+        } catch (IOException ex) {
+            Logger.getLogger(Uf3Practica1Ex1.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        fileW.flush();
-        fileW.close();
-    }
-
-    static void nuevaLinea() throws IOException {
-        insertarLinea(false, "", null);
     }
 }
